@@ -132,26 +132,35 @@ namespace BeatThat
 
 		override public void Delete(bool deleteFoundInstance)
 		{
-			var go = this.managedGameObject;
-			if(go != null) {
-				if(m_foundNotInstantiated && !deleteFoundInstance) {
-					go.SetActive(false);
-				}
-				else {
-					m_lastDestroyFrame = Time.frameCount;
-	#if UNITY_EDITOR
-					if(Application.isPlaying) {
-						Destroy(go);
-					}
-					else {
-						DestroyImmediate(go);
-					}
-	#else
-					Destroy(go);
-	#endif
-//					m_gameObject = null;
-				}
+			var o = m_object.value;
+			if(o == null) {
+				m_object = new SafeRef<T>(null);
+				return;
 			}
+
+			var go = o.gameObject;
+			if(go == null) {
+				m_object = new SafeRef<T>(null);
+				return;
+			}
+
+			if(m_foundNotInstantiated && !deleteFoundInstance) {
+				go.SetActive(false);
+				return;
+			}
+
+
+			m_lastDestroyFrame = Time.frameCount;
+#if UNITY_EDITOR
+			if(Application.isPlaying) {
+				Destroy(go);
+			}
+			else {
+				DestroyImmediate(go);
+			}
+#else
+			Destroy(go);
+#endif
 
 			m_object = new SafeRef<T>(null);
 		}

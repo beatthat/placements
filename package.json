@@ -1,6 +1,6 @@
 {
   "name": "unity-placements",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "components to manage instantiation (and destruction) of prefabs including common behaviours like setting position and scale.",
   "main": "index.js",
   "repository": {
