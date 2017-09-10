@@ -1,11 +1,12 @@
 {
-  "name": "unity-placements",
-  "version": "0.0.2",
-  "description": "components to manage instantiation (and destruction) of prefabs including common behaviours like setting position and scale.",
+  "name": "placements",
+  "scope": "ape",
+  "version": "0.0.3",
+  "description": "Components to manage instantiation (and destruction) of prefabs including common behaviours like setting position and scale.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/beatthat/unity-placements.git"
+    "url": "git+https://github.com/beatthat/placements.git"
   },
   "files": [
     "index.js",
@@ -15,14 +16,20 @@
   "author": "larrykirschner@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/beatthat/unity-placements/issues"
+    "url": "https://github.com/beatthat/placements/issues"
   },
-  "homepage": "https://github.com/beatthat/unity-placements",
+  "homepage": "https://github.com/beatthat/placements",
   "scripts": {
-    "postinstall": "node scripts/postinstall.js"
+    "postinstall": "node scripts/postinstall.js",
+    "install:test": "rm -f *.tgz && npm pack && cd test && npm run clean && npm install",
+    "clean": "rm -f *.tgz && cd test && npm run clean",
+    "sync:test2src": "rsync -rv --include '*/' --include '*.cs' --exclude '*' --prune-empty-dirs test/Assets/Plugins/${npm_package_scope}/${npm_package_name}/ ./src/${npm_package_name}/",
+    "pub:tag": "git add -A && git commit -m ${npm_package_version} && git tag -a ${npm_package_version} -m ${npm_package_version} && git push origin master && git push origin ${npm_package_version}"
   },
   "dependencies": {
     "ncp": "^2.0.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "safe-refs": "beatthat/safe-refs#semver:^0.0.1",
+    "transform-path-ext": "beatthat/transform-path-ext#semver:^0.0.1"
   }
 }

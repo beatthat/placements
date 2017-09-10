@@ -15,7 +15,7 @@ namespace BeatThat
 		abstract public void Delete(bool deleteFoundInstance);
 	}
 
-	public class PrefabPlacement<T> : PrefabPlacement, ObjectPlacement<T> where T : Component
+	public class PrefabPlacement<T> : PrefabPlacement, Placement<T> where T : Component
 	{
 		public T m_prefab;
 		public bool m_createObjectOnStart = false;
