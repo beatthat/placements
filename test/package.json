@@ -10,7 +10,7 @@
     "overwrite:test2src": "node ./scripts/overwrite-test2src.js"
   },
   "dependencies": {
-    "placements": "../placements-0.0.4.tgz"
+    "placements": "../placements-0.0.5.tgz"
   },
   "devDependencies": {
     "babel-core": "^5.8.23",
