@@ -5,6 +5,7 @@ namespace BeatThat
 {
 	public abstract class PrefabPlacement : MonoBehaviour
 	{
+		abstract public bool isPrefabSet { get; } 
 
 		abstract public bool objectExists { get; }
 
@@ -23,6 +24,31 @@ namespace BeatThat
 		public bool m_destroyObjectOnDisable = false;
 
 		public bool m_disableWarnOnFindInstance;
+
+
+		[Tooltip(@"set TRUE to see GizmoSettings in inspector")]
+		public bool m_unhideGizmoSettings;
+
+		override public bool isPrefabSet { get { return m_prefab != null; } }
+
+		#if UNITY_EDITOR
+		virtual protected void Awake()
+		{
+			UpdateGizmoSettingsVisibility ();
+		}
+
+		void OnValidate()
+		{
+			UpdateGizmoSettingsVisibility ();
+		}
+
+		public void UpdateGizmoSettingsVisibility()
+		{
+			var hf = (m_unhideGizmoSettings) ? HideFlags.None : HideFlags.HideInInspector;
+
+			this.AddIfMissing<GizmoSettings> ().hideFlags = hf;
+		}
+		#endif
 
 		// Analysis disable ConvertToAutoProperty
 		public T prefab
