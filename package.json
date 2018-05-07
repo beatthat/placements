@@ -1,6 +1,6 @@
 {
   "name": "placements",
-  "scope": "ape",
+  "scope": "beatthat",
   "version": "1.0.1",
   "description": "Components to manage instantiation (and destruction) of prefabs including common behaviours like setting position and scale.",
   "main": "index.js",
@@ -11,7 +11,8 @@
   "files": [
     "index.js",
     "scripts",
-    "src"
+    "src",
+    "Runtime"
   ],
   "author": "larrykirschner@gmail.com",
   "license": "MIT",
@@ -34,6 +35,7 @@
   "dependencies": {
     "get-components-ext": "github:beatthat/get-components-ext#semver:^1.0.0",
     "gizmo-settings": "github:beatthat/gizmo-settings#semver:^1.0.0",
+    "manage-prefab-instances": "github:beatthat/manage-prefab-instances#semver:^1.0.0",
     "path": "^0.12.7",
     "rect-utils": "beatthat/rect-utils#semver:^1.0.0",
     "safe-refs": "beatthat/safe-refs#semver:^1.0.0",
