@@ -1,7 +1,7 @@
 {
   "name": "placements",
   "scope": "beatthat",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Components to manage instantiation (and destruction) of prefabs including common behaviours like setting position and scale.",
   "main": "index.js",
   "repository": {
