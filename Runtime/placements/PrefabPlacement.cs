@@ -44,10 +44,10 @@ When parent prefab is applied bake any found instances into the parent prefab."
 		virtual public bool objectExists { get { throw new NotImplementedException(); } } 
 
 		virtual public GameObject managedGameObject { get { throw new NotImplementedException(); } } 
-
+        
 		virtual public UnityEngine.Object prefabObject { get { throw new NotImplementedException(); } }
 
-		virtual public int numPrefabTypes { get { return 1; } }
+		virtual public bool supportsMultiplePrefabTypes { get { return false; } }
 
 		virtual public void GetPrefabInstances (ICollection<PrefabInstance> instances, bool ensureCreated = false)
 		{
