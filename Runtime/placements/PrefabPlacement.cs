@@ -1,16 +1,19 @@
-using UnityEngine;
-using BeatThat;
 using System;
-using UnityEngine.Serialization;
 using System.Collections.Generic;
+using BeatThat.GetComponentsExt;
+using BeatThat.GizmoSetting;
 using BeatThat.ManagePrefabInstances;
+using BeatThat.SafeRefs;
+using BeatThat.TransformPathExt;
+using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace BeatThat
+namespace BeatThat.Placements
 {
-	/// <summary>
-	/// Non-generic base class for PrefabPlacement, makes it possible to have a default inspector (that's also why the class is not abstract)
-	/// </summary>
-	public class PrefabPlacement : MonoBehaviour, ManagesPrefabInstances
+    /// <summary>
+    /// Non-generic base class for PrefabPlacement, makes it possible to have a default inspector (that's also why the class is not abstract)
+    /// </summary>
+    public class PrefabPlacement : MonoBehaviour, ManagesPrefabInstances
 	{
 		public bool m_createObjectOnStart = false;
 		public bool m_createObjectOnEnable = false;
@@ -369,3 +372,8 @@ When parent prefab is applied bake any found instances into the parent prefab."
 
 	}
 }
+
+
+
+
+

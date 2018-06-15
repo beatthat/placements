@@ -1,10 +1,10 @@
-using UnityEngine;
-using UnityEditor;
 using BeatThat.ManagePrefabInstances;
+using UnityEditor;
+using UnityEngine;
 
-namespace BeatThat
+namespace BeatThat.Placements
 {
-	[CustomEditor(typeof(PrefabPlacement), true)]
+    [CustomEditor(typeof(PrefabPlacement), true)]
 	[CanEditMultipleObjects]
 	public class PrefabPlacementEditor : UnityEditor.Editor 
 	{
@@ -36,3 +36,4 @@ namespace BeatThat
 		}
 	}
 }
+

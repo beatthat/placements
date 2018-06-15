@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace BeatThat
+namespace BeatThat.Placements
 {
-	public class TransformPlacement : PrefabPlacement<Transform> 
+    public class TransformPlacement : PrefabPlacement<Transform> 
 	{
 		
 	}
