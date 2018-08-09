@@ -20,6 +20,10 @@ namespace BeatThat.Placements
 		public bool m_destroyObjectOnDisable = false;
 
 
+        public enum ReleaseAction { DESTROY = 0, DISABLE = 1 }
+        public ReleaseAction m_onRelease = ReleaseAction.DESTROY; 
+
+
 		[Tooltip(@"Control how you want this PrefabPlacement to treat instances of its prefab:
 	
 WarnOnFindInstance 
@@ -67,7 +71,7 @@ When parent prefab is applied bake any found instances into the parent prefab."
 			throw new NotImplementedException();
 		}
 
-		virtual public void Delete(bool deleteFoundInstance)
+        virtual public void Release(bool deleteFoundInstance)
 		{
 			throw new NotImplementedException();
 		}
@@ -165,7 +169,7 @@ When parent prefab is applied bake any found instances into the parent prefab."
 		void OnDisable()
 		{
 			if(m_destroyObjectOnDisable) {
-				Delete();
+				Release();
 			}
 		}
 		
@@ -224,7 +228,7 @@ When parent prefab is applied bake any found instances into the parent prefab."
 
 		public void Recreate()
 		{
-			Delete();
+			Release();
 			EnsureCreated();
 		}
 
@@ -263,12 +267,15 @@ When parent prefab is applied bake any found instances into the parent prefab."
 			m_object = new SafeRef<T>(o);
 		}
 
-		public void Delete()
+        [Obsolete] public void Delete() { Release(); }
+        [Obsolete] public void Delete(bool deleteFoundInstance) { Release(deleteFoundInstance); }
+
+        public void Release()
 		{
-			Delete(false);
+			Release(false);
 		}
 
-		override public void Delete(bool deleteFoundInstance)
+        override public void Release(bool releaseFoundInstance)
 		{
 			var o = m_object.value;
 			if(o == null) {
@@ -282,7 +289,7 @@ When parent prefab is applied bake any found instances into the parent prefab."
 				return;
 			}
 
-			if(m_foundNotInstantiated && !deleteFoundInstance) {
+            if(m_onRelease == ReleaseAction.DISABLE || (m_foundNotInstantiated && !releaseFoundInstance)) {
 				go.SetActive(false);
 				return;
 			}

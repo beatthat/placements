@@ -9,7 +9,7 @@ namespace BeatThat.Placements
 		
 		void EnsureCreated();
 		
-		void Delete();
+		void Release();
 		
 	}
 }
