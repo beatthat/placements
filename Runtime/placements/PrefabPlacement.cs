@@ -44,6 +44,8 @@ When parent prefab is applied bake any found instances into the parent prefab."
 		[Tooltip(@"set TRUE to see GizmoSettings in inspector")]
 		public bool m_unhideGizmoSettings;
 
+        public bool m_debug;
+
 		public PrefabInstancePolicy defaultInstancePolicy { get { return m_defaultInstancePolicy; } } 
 
 		virtual public bool isPrefabSet { get { throw new NotImplementedException(); } } 
@@ -239,6 +241,14 @@ When parent prefab is applied bake any found instances into the parent prefab."
 
 		private void EnsureCreated(bool supressWarnings)
 		{
+
+#if UNITY_EDITOR || DEBUG_UNSTRIP
+            if (m_debug)
+            {
+                Debug.Log("[" + Time.frameCount + "][" + this.Path() + "] EnsureCreated");
+            }
+#endif
+
 			if(m_object.value != null) {
 				return;
 			}
@@ -272,11 +282,17 @@ When parent prefab is applied bake any found instances into the parent prefab."
 
         public void Release()
 		{
-			Release(false);
+            Release(false);
 		}
 
         override public void Release(bool releaseFoundInstance)
 		{
+
+#if UNITY_EDITOR || DEBUG_UNSTRIP
+            if(m_debug) {
+                Debug.Log("[" + Time.frameCount + "][" + this.Path() + "] Release");
+            }
+#endif
 			var o = m_object.value;
 			if(o == null) {
 				m_object = new SafeRef<T>(null);
@@ -294,7 +310,7 @@ When parent prefab is applied bake any found instances into the parent prefab."
 				return;
 			}
 
-
+            m_object = new SafeRef<T>(null);
 			m_lastDestroyFrame = Time.frameCount;
 #if UNITY_EDITOR
 			if(Application.isPlaying) {
